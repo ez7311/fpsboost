@@ -1,11 +1,10 @@
 package id.fpsboost;
 
 import net.minecraft.client.CloudStatus;
-import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
-import net.minecraft.client.ParticleStatus;
+import net.minecraft.server.level.ParticleStatus;
 
 public final class Optimizer {
 	private Optimizer() {
@@ -19,7 +18,6 @@ public final class Optimizer {
 
 		set(o.renderDistance(), p.renderDistance);
 		set(o.simulationDistance(), p.simulationDistance);
-		set(o.graphicsMode(), p.graphics);
 		set(o.particles(), p.particles);
 		set(o.cloudStatus(), p.clouds);
 		set(o.entityShadows(), p.entityShadows);
@@ -43,7 +41,6 @@ public final class Optimizer {
 		Options o = mc.options;
 		set(o.renderDistance(), b.renderDistance);
 		set(o.simulationDistance(), b.simulationDistance);
-		set(o.graphicsMode(), GraphicsStatus.valueOf(b.graphics));
 		set(o.particles(), ParticleStatus.valueOf(b.particles));
 		set(o.cloudStatus(), CloudStatus.valueOf(b.clouds));
 		set(o.entityShadows(), b.shadows);
@@ -65,7 +62,6 @@ public final class Optimizer {
 		FpsBoostConfig.Backup b = new FpsBoostConfig.Backup();
 		b.renderDistance = o.renderDistance().get();
 		b.simulationDistance = o.simulationDistance().get();
-		b.graphics = o.graphicsMode().get().name();
 		b.particles = o.particles().get().name();
 		b.clouds = o.cloudStatus().get().name();
 		b.shadows = o.entityShadows().get();
@@ -85,4 +81,4 @@ public final class Optimizer {
 			FpsBoostClient.LOGGER.warn("Gagal mengubah opsi: {}", value, e);
 		}
 	}
-        }
+}
