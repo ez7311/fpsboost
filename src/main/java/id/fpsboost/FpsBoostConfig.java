@@ -44,4 +44,16 @@ public final class FpsBoostConfig {
 		} catch (Exception e) {
 			FpsBoostClient.LOGGER.warn("Gagal membaca config, memakai default", e);
 		}
-		FpsBoostConfig cfg = new FpsBoostConfig();
+		FpsBoostConfig cfg = new FpsBoostConfig();		cfg.save();
+		return cfg;
+	}
+
+	public void save() {
+		try {
+			Files.createDirectories(FILE.getParent());
+			Files.writeString(FILE, GSON.toJson(this));
+		} catch (IOException e) {
+			FpsBoostClient.LOGGER.warn("Gagal menyimpan config", e);
+		}
+	}
+}
